@@ -67,7 +67,7 @@ Now you should be able to access your site using `test.app` in your browser
 When you create other projects you should make sure you are using other ports that in different projects, so you should write down those ports each time you add new project to make sure
 there won't be any port collisions between projects.
 
-# Other docker commands
+## Other docker commands
 
 To stop, build etc. project please look at `docc` command list. You can also investigate `.bashrc` content to know what exactly those commands do. 
 
