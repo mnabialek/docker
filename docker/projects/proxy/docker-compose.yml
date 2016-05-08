@@ -1,0 +1,23 @@
+proxy:
+   image: jwilder/nginx-proxy
+   restart: always
+   volumes:
+     - /var/run/docker.sock:/tmp/docker.sock:ro
+   ports:
+     - "80:80"
+   container_name: proxy
+
+# Based on https://wiki.ssdt-ohio.org/display/rtd/Using+nginx-proxy
+# Full example
+#proxy:
+#   image: jwilder/nginx-proxy
+#   restart: always
+#   volumes:
+#     - /var/run/docker.sock:/tmp/docker.sock:ro
+#     - ./certs:/etc/nginx/certs:ro
+#     - ./vhost.d:/etc/nginx/vhost.d
+#     - ./html:/usr/share/nginx/html
+#   environment:
+#     - DEFAULT_HOST=demo.example.com
+#   ports:
+#     - "80:80"
