@@ -25,8 +25,14 @@ RUN mv composer.phar /usr/local/bin/composer
 # Speed up Composer installations
 RUN composer global require hirak/prestissimo
 
+# Install Libxml2 to install Soap PHP extension
+RUN apt-get install --yes libxml2-dev
+
+# Install Zlib to install Zip PHP extension
+RUN apt-get install --yes zlib1g-dev
+
 # Install some basic php extensions
-RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-install pdo pdo_mysql gettext mysqli soap zip opcache
 
 # Install xdebug
 RUN pecl install xdebug

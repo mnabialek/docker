@@ -1,7 +1,5 @@
-Docker
-
+# Docker
 ===
-
 This project is intended to help you create and manage your Docker projects (instruction is for Windows but Linux users can also use this for their Docker projects). It contains PHP, Nginx and MySQL server. It's intended only for local usage (no security aspects included);
 
 ===
@@ -83,6 +81,10 @@ You can SSH into PHP container using private key, `root` as user, docker IP and 
 You can connect to database server using `root` as user, `pass` as password (by default) docker IP and database port you gave using `dcc` command.
 
 To connect database from PHP application you can use `db` as host, `3306` as port, `root` as username and `pass` as password (by default).
+
+# PHP configuration
+
+By default there are a few PHP extensions installed. You can add more in `docker/definitions/php-7.0-fpm/Dockerfile`. Be aware to use them in the project, you need to add more PHP configuration files into `templates/php7-nginx-mysql57/php/config/conf.d` directory. By default only `pdo_mysql` and `xdebug` are turned on however some additional extensions (for example `soap` are already included in build.  
 
 # Licence
 
