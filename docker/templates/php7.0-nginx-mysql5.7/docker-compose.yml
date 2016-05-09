@@ -15,7 +15,7 @@ web:
     - VIRTUAL_HOST=${domain}
   hostname: ${domain}
 php:
-  build: ${definitionsdir}php-7.0-fpm
+  build: ${definitionsdir}php/7.0
   volumes:
     - ${projectdir}${domain}/html/:/usr/share/nginx/html/
     - ${projectdir}${domain}/php/config/:/usr/local/etc/php/
@@ -30,7 +30,7 @@ php:
   ports:
     - "${sshPort}:22"
 db:
-  build: ${definitionsdir}mysql-5.7
+  build: ${definitionsdir}mysql/5.7
   environment:
      - MYSQL_ROOT_PASSWORD=pass
      - MYSQL_DATABASE=
