@@ -104,7 +104,7 @@ fi
 if [ -z "$7" ]; then
   TEMPLATE=$DEFAULT_TEMPLATE;
 else
-  TEMPLATE=$6;  
+  TEMPLATE=$7;  
 fi
 
 # Verify whether template directory exists
