@@ -3,6 +3,7 @@ proxy:
    restart: always
    volumes:
      - /var/run/docker.sock:/tmp/docker.sock:ro
+     -./nginx/conf.d/proxy.conf:/etc/nginx/conf.d/proxy.conf:ro
    ports:
      - "80:80"
    container_name: proxy
