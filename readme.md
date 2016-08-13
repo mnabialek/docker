@@ -34,23 +34,23 @@ In terminal run `dcc` to create project, you will see required parameters for th
 
 Example creation of project:
 
-    ```
-    dcc test.app test 8080 30060 220 10010
-    ```
+```
+dcc test.app test 8080 30060 220 10010
+```
 
 Now if everything goes fine, you can run the project running in terminal:
 
-    ```
-    dcu test.app
-    ```
+```
+dcu test.app
+```
 
 Now you can access your site in browser using your Docker IP (usually 192.169.99.100) and port you gave for `dcc` command - in this case it would be 192.169.99.100:8080
 
 If you want to run your site using domain without port, add 
 
-    ```
-    192.168.99.100 test.app
-    ```
+```
+192.168.99.100 test.app
+```
     
 into your Windows `hosts` file
     
