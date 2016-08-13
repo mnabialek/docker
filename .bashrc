@@ -77,7 +77,7 @@ alias di='docker images'
 
 alias drmi='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 
-alias drmia='docker rmi $(docker images -q)'
+alias drmia='docker rmi --force $(docker images -q)'
 
 alias dfix="docker-machine restart default && eval $(docker-machine env default)"
 
