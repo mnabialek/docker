@@ -81,7 +81,7 @@ To connect database from PHP application you can use `db` as host, `3306` as por
 
 ## PHP configuration
 
-By default there are a few PHP extensions installed. You can add more in `docker/definitions/php-7.0-fpm/Dockerfile`. Be aware to use them in the project, you need to add more PHP configuration files into `templates/php7-nginx-mysql57/php/config/conf.d` directory. By default only `pdo_mysql` and `xdebug` are turned on however some additional extensions (for example `soap` are already included in build.  
+By default there are a few PHP extensions installed. You can add more in `docker/definitions/php-7.0-fpm/Dockerfile`. Be aware to use them in the project, you need to add more PHP configuration files into `templates/php7-nginx-mysql57/php/config/conf.d` directory. By default only `pdo_mysql` and `xdebug` are turned on however some additional extensions (for example `soap`) are already included in build.  
 
 ## Licence
 

@@ -1,5 +1,5 @@
 # Base image
-FROM php:7-fpm
+FROM php:7.0-fpm
 
 # Update packages list
 RUN apt-get --yes update;
