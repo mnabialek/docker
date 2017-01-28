@@ -1,8 +1,8 @@
 #!/bin/sh
 
 # SSH - this would be useful when need to log in using password (123 here is root password)
-#echo 'root:123' | chpasswd
-#sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+echo 'root:123' | chpasswd
+sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # SSH - login using SSH keys - copy public SSH key to authorized_keys
 mkdir /root/.ssh
