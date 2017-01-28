@@ -1,5 +1,17 @@
 # Docker
-This project is intended to help you create and manage your Docker projects (instruction is for Windows but Linux users can also use this for their Docker projects). It contains **PHP 7**, **Nginx** and **MySQL 5.7** server. It's intended only for local usage (no security aspects included);
+This project is intended to help you create and manage your Docker projects. It was tested on is for Windows but Linux users can also use this for their Docker projects (be aware installation instruction is for Windows users). It's intended only for local usage (no security aspects included).
+ 
+# Available components
+ 
+The following components are available at the moment:
+- **PHP 5.6** (based on PHP Docker image)
+- **PHP 5.6 with intl extension** (based on PHP Docker image)
+- **PHP 7.0** (based on PHP Docker image)
+- **PHP 7.1** (based on PHP Docker image)
+- **PHP 7.1** (based on Ubuntu 16.04 Docker image)
+- **MySQL 5.6**
+- **MySQL 5.7**
+- **Nginx**
 
 ## Installation
 
@@ -64,8 +76,7 @@ Now you should be able to access your site using `test.app` in your browser
 
 ## Other projects
 
-When you create other projects you should make sure you are using other ports that in different projects, so you should write down those ports each time you add new project to make sure
-there won't be any port collisions between projects.
+When you create other projects you should make sure you are using other ports that in different projects, so you should write down those ports each time you add new project to make sure there won't be any port collisions between projects.
 
 ## Other docker commands
 
@@ -79,9 +90,22 @@ You can connect to database server using `root` as user, `pass` as password (by 
 
 To connect database from PHP application you can use `db` as host, `3306` as port, `root` as username and `pass` as password (by default).
 
+## Available templates
+
+This project comes with a few built-in templates:
+
+- **PHP 5.6 with MySQL 5.6 and Nginx**
+- **PHP 7.0 with MySQL 5.7 and Nginx**
+- **PHP 7.1 with MySQL 5.7 and Nginx**
+- **PHP 7.1 (based on Ubuntu) with MySQL 5.7 and Nginx**
+
+By default when creating new project using `dcc` command will be selected template defined in `.bashrc` for `DEFAULT_TEMPLATE` variable (it's set to **PHP 7.1 with MySQL 5.7 and Nginx** by default).
+
+Obviously depending on your needs you might want to create custom templates (in `docker/templates` directory) or even brand new components (in `docker/definitions` directory) that will fit better your desired environment.
+
 ## PHP configuration
 
-By default there are a few PHP extensions installed. You can add more in `docker/definitions/php-7.0-fpm/Dockerfile`. Be aware to use them in the project, you need to add more PHP configuration files into `templates/php7-nginx-mysql57/php/config/conf.d` directory. By default only `pdo_mysql` and `xdebug` are turned on however some additional extensions (for example `soap`) are already included in build.  
+By default there are a few PHP extensions installed. You can add more in `Dockerfile` for PHP in `docker/definitions` directory. Be aware to use them in the project, you need to add more PHP configuration files into `*/php/config/conf.d` directory. By default only `pdo_mysql` and `xdebug` are turned on however some additional extensions (for example `soap` or `gd`) are already included in build.  
 
 ## Licence
 
