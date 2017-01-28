@@ -13,8 +13,8 @@ export COMPOSER_PROCESS_TIMEOUT=2000
 # We will run Composer as root and don't want this warning
 export COMPOSER_ALLOW_SUPERUSER=1
 
-# We want to run Composer without Xdebug enabled to make it quicker
-alias composer="php -n /usr/local/bin/composer"
+# Set Composer alias
+alias composer="/usr/local/bin/composer"
 
 # Fix for MC (actually ncurses) to display lines properly
 export LANG="C.UTF-8"
