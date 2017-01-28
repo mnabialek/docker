@@ -29,4 +29,4 @@ alias phpunit="vendor/bin/phpunit"
 alias www="cd /usr/share/nginx/html/"
 
 # Start in website directory by default
-www
+cd /usr/share/nginx/html/
