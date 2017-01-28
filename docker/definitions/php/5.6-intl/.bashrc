@@ -20,7 +20,7 @@ alias composer="/usr/local/bin/composer"
 export LANG="C.UTF-8"
 
 # Alias for Artisan
-alias artisan="php artisan"
+alias a="php artisan"
 
 # Alias for PHPUnit
 alias phpunit="vendor/bin/phpunit"
