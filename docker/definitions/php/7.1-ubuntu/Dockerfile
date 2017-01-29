@@ -21,6 +21,7 @@ RUN apt-get --yes install nano
 
 # Install PHP
 RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php -y
+RUN apt-key update
 RUN apt-get --yes update
 RUN apt-get --yes install php7.1-fpm
 
