@@ -16,7 +16,7 @@ composer config -g github-oauth.github.com $(cat /root/.local_share/tokens/githu
 # Run PHP service
 service php7.1-fpm start
 
-# Run PHP service
+# Run Nginx service
 service nginx start
 
 # Disable Xdebug for command line
@@ -24,4 +24,3 @@ phpdismod -s cli xdebug
 
 # Start supervisor
 supervisord -n
-dps

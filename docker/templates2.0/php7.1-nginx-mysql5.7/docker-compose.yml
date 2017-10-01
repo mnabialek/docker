@@ -3,8 +3,7 @@ web:
   volumes:
     - ${projectdir}${domain}/html/:/usr/share/nginx/html/
     - ${projectdir}${domain}/nginx/conf.d/:/etc/nginx/conf.d/
-    - ${projectdir}${domain}/nginx/log/:/var/log/nginx/    
-    - ${projectdir}${domain}/php/config/:/usr/local/etc/php/
+    - ${projectdir}${domain}/nginx/log/:/var/log/nginx/
     - ${projectdir}${domain}/supervisor/conf.d/:/etc/supervisor/conf.d/
     - ${projectdir}${domain}/supervisor/log/:/var/log/supervisor/
     - ${localsharedir}:/root/.local_share/
