@@ -72,6 +72,22 @@ RUN sed -i -e "s#;files = relative/directory/\*.ini#files = /etc/supervisor/conf
 # Set PHP to listen on given port instead of unix socket
 RUN sed -i -e 's#listen = \/run\/php\/php7.1-fpm.sock#listen = 0.0.0.0:9000#g' /etc/php/7.1/fpm/pool.d/www.conf
 
+# Set xdebug options
+RUN echo "xdebug.remote_enable = 1" >> /etc/php/7.1/mods-available/xdebug.ini
+RUN echo "xdebug.remote_connect_back = 1" >> /etc/php/7.1/mods-available/xdebug.ini
+RUN echo "xdebug.remote_port = 9999" >> /etc/php/7.1/mods-available/xdebug.ini
+RUN echo "xdebug.max_nesting_level = 512" >> /etc/php/7.1/mods-available/xdebug.ini
+RUN echo "xdebug.profiler_output_dir=\"\"" >> /etc/php/7.1/mods-available/xdebug.ini
+RUN echo "xdebug.profiler_enable_trigge=1" >> /etc/php/7.1/mods-available/xdebug.ini
+
+# Set PHP options
+RUN sed -i "s/error_reporting = .*/error_reporting = -1/" /etc/php/7.1/fpm/php.ini
+RUN sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.1/fpm/php.ini
+RUN sed -i "s/;cgi.fix_pathinfo=1/cgi.fix_pathinfo=0/" /etc/php/7.1/fpm/php.ini
+RUN sed -i "s/memory_limit = .*/memory_limit = 2048M/" /etc/php/7.1/fpm/php.ini
+RUN sed -i "s/upload_max_filesize = .*/upload_max_filesize = 100M/" /etc/php/7.1/fpm/php.ini
+RUN sed -i "s/post_max_size = .*/post_max_size = 100M/" /etc/php/7.1/fpm/php.ini
+
 # Install Chrome web driver and other libraries required to run Laravel Dusk tests
 RUN apt-get -y install libxpm4 libxrender1 libgtk2.0-0 \
 libnss3 libgconf-2-4 chromium-browser \

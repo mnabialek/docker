@@ -178,15 +178,15 @@ export -f dcc
 function dcc2 {
 
 # Verify number of arguments
-if [ "$#" -lt 7 ]; then
-   echo "${red}Invalid number of parameters. You should pass \$domain, \$prefix, \$webPort, \$secureWebPort, \$dbPort, \$sshPort, \$xdebugPort and optionally \$templateName${reset}";
+if [ "$#" -lt 6 ]; then
+   echo "${red}Invalid number of parameters. You should pass \$domain, \$prefix, \$webPort, \$secureWebPort, \$dbPort, \$sshPort and optionally \$templateName${reset}";
    return;
 fi
 
-if [ -z "$8" ]; then
+if [ -z "$7" ]; then
   TEMPLATE=$DEFAULT_TEMPLATE_2
 else
-  TEMPLATE=$8;  
+  TEMPLATE=$7;  
 fi
 
 # Verify whether template directory exists
@@ -224,11 +224,6 @@ echo "Created ${OUTPUT_DIR}docker-compose.yml file";
 # Copy nginx directory structure
 cp -R "${TEMPLATE_DIR_2}${TEMPLATE}/nginx" "${OUTPUT_DIR}nginx"
 echo "Created ${OUTPUT_DIR}nginx directory structure";
-
-# Copy php structure
-cp -R "${TEMPLATE_DIR_2}${TEMPLATE}/php" "${OUTPUT_DIR}php"
-sed -i -e "s/\${xdebugPort}/$7/g" ${OUTPUT_DIR}php/config/conf.d/20-xdebug.ini;
-echo "Created ${OUTPUT_DIR}php directory structure";
 
 # Copy MySQL structure
 cp -R "${TEMPLATE_DIR_2}${TEMPLATE}/mysql" "${OUTPUT_DIR}mysql"
