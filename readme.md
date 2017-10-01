@@ -40,6 +40,12 @@ The following components are available at the moment:
    
 6. Into `local_directory` of your docker directory you should put public SSH key (in OpenSSH format) into `ssh` subdirectory and you should generate Github access token and put it into `github-oauth` file of `tokens` directory
 
+7. Adjust path in `docker-compose.yml` in `proxy` project that will match your certificated directory. By default it's set to:
+
+   ```
+   /c/Users/marcin/docker/local_share/certificates
+   ```
+
 ## Project creation
 
 In terminal run `dcc` to create project, you will see required parameters for this command.
