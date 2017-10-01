@@ -8,9 +8,11 @@
 DOCKER_DIR='/c/Users/marcin/docker/';
 DEFINITIONS_DIR='/Users/marcin/docker/definitions/';
 TEMPLATE_DIR=$DOCKER_DIR'templates/';
+TEMPLATE_DIR_2=$DOCKER_DIR'templates2.0/';
 PROJECT_DIR=$DOCKER_DIR'projects/';
 LOCAL_SHARE_DIRECTORY=$DOCKER_DIR'local_share/';
 DEFAULT_TEMPLATE='php7.1-nginx-mysql5.7';
+DEFAULT_TEMPLATE_2='php7.1-nginx-mysql5.7';
 
 ################################################
 # Define colors for terminal
@@ -28,6 +30,7 @@ reset=`tput sgr0`
 function docc() {
    echo "Available aliases for Docker commands:"
    echo "${green}dcc ${yellow}(Docker compose create)${reset} - create new docker compose project from template";
+   echo "${green}dcc2 ${yellow}(Docker compose create)${reset} - create new docker compose project from template (version 2.0)";   
    echo "${green}dcu ${yellow}(Docker compose up)${reset} - run containers from given docker compose project";
    echo "${green}dcs ${yellow}(Docker compose stop)${reset} - stop containers for given docker compose project";
    echo "${green}dcb ${yellow}(Docker compose build)${reset} - build containers for given docker compose project";
@@ -166,3 +169,84 @@ echo "${green}Hint: ${red}You should add this project to XLS to not use same por
 }
 
 export -f dcc
+
+
+#############################################################
+# Creating docker compose project from template (version 2.0)
+#############################################################
+
+function dcc2 {
+
+# Verify number of arguments
+if [ "$#" -lt 7 ]; then
+   echo "${red}Invalid number of parameters. You should pass \$domain, \$prefix, \$webPort, \$secureWebPort, \$dbPort, \$sshPort, \$xdebugPort and optionally \$templateName${reset}";
+   return;
+fi
+
+if [ -z "$8" ]; then
+  TEMPLATE=$DEFAULT_TEMPLATE_2
+else
+  TEMPLATE=$8;  
+fi
+
+# Verify whether template directory exists
+if [ ! -d "${TEMPLATE_DIR_2}${TEMPLATE}" ]; then
+  echo "${red}Template directory ${TEMPLATE_DIR_2}${TEMPLATE} does NOT exist${reset}";
+  return;
+fi
+
+# Set output directory
+OUTPUT_DIR=$PROJECT_DIR"$1"'/';
+
+# Verify whether output directory already exists
+if [ -d "$OUTPUT_DIR" ]; then
+  echo "${red}Directory ${OUTPUT_DIR} already exists. Cannot create new Docker project${reset}";
+  return;
+fi
+
+# Create project directory
+mkdir $OUTPUT_DIR;
+echo "Created ${OUTPUT_DIR} directory"
+
+# Copy docker-compose.yml and fill in variables
+cp "${TEMPLATE_DIR_2}${TEMPLATE}/docker-compose.yml" $OUTPUT_DIR; 
+sed -i -e "s#\${projectdir}#${PROJECT_DIR}#g" ${OUTPUT_DIR}docker-compose.yml;
+sed -i -e "s#\${definitionsdir}#${DEFINITIONS_DIR}#g" ${OUTPUT_DIR}docker-compose.yml;
+sed -i -e "s#\${localsharedir}#${LOCAL_SHARE_DIRECTORY}#g" ${OUTPUT_DIR}docker-compose.yml;
+sed -i -e "s/\${domain}/$1/g" ${OUTPUT_DIR}docker-compose.yml;
+sed -i -e "s/\${prefix}/$2/g" ${OUTPUT_DIR}docker-compose.yml;
+sed -i -e "s/\${webPort}/$3/g" ${OUTPUT_DIR}docker-compose.yml;
+sed -i -e "s/\${secureWebPort}/$4/g" ${OUTPUT_DIR}docker-compose.yml;
+sed -i -e "s/\${dbPort}/$5/g" ${OUTPUT_DIR}docker-compose.yml;
+sed -i -e "s/\${sshPort}/$6/g" ${OUTPUT_DIR}docker-compose.yml;
+echo "Created ${OUTPUT_DIR}docker-compose.yml file";
+
+# Copy nginx directory structure
+cp -R "${TEMPLATE_DIR_2}${TEMPLATE}/nginx" "${OUTPUT_DIR}nginx"
+echo "Created ${OUTPUT_DIR}nginx directory structure";
+
+# Copy php structure
+cp -R "${TEMPLATE_DIR_2}${TEMPLATE}/php" "${OUTPUT_DIR}php"
+sed -i -e "s/\${xdebugPort}/$7/g" ${OUTPUT_DIR}php/config/conf.d/20-xdebug.ini;
+echo "Created ${OUTPUT_DIR}php directory structure";
+
+# Copy MySQL structure
+cp -R "${TEMPLATE_DIR_2}${TEMPLATE}/mysql" "${OUTPUT_DIR}mysql"
+echo "Created ${OUTPUT_DIR}mysql directory structure";
+
+# Copy html structure
+cp -R "${TEMPLATE_DIR_2}${TEMPLATE}/html" "${OUTPUT_DIR}html"
+sed -i -e "s/\${domain}/$1/g" ${OUTPUT_DIR}/html/public/index.php;
+echo "Created ${OUTPUT_DIR}html directory structure";
+
+# Copy supervisor structure
+cp -R "${TEMPLATE_DIR_2}${TEMPLATE}/supervisor" "${OUTPUT_DIR}supervisor"
+echo "Created ${OUTPUT_DIR}supervisor directory structure";
+
+echo "Finished with success";
+
+echo "${green}Hint: ${red}You should add this project to XLS to not use same ports in future${reset}";
+}
+
+export -f dcc2
+

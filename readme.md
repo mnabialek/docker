@@ -48,13 +48,21 @@ The following components are available at the moment:
 
 ## Project creation
 
-In terminal run `dcc` to create project, you will see required parameters for this command.
+In terminal run `dcc2` to create project, you will see required parameters for this command.
 
 Example creation of project:
 
 ```
+dcc2 test.app test 8080 18080 30060 220 10010
+```
+
+or 
+
+```
 dcc test.app test 8080 30060 220 10010
 ```
+
+if you are using old-version templates.
 
 Now if everything goes fine, you can run the project running in terminal:
 
@@ -78,7 +86,7 @@ and run also
 dcu proxy
 ```
 
-Now you should be able to access your site using `test.app` in your browser
+Now you should be able to access your site using `http://test.app` in your browser. If you created project using `dcc2` you should get working both `http://test.app` and `https://test.app` but if you used `dcc` only http version will be working by default.
 
 ## Other projects
 
@@ -100,14 +108,16 @@ To connect database from PHP application you can use `db` as host, `3306` as por
 
 This project comes with a few built-in templates:
 
-- **PHP 5.6 with MySQL 5.6 and Nginx**
-- **PHP 7.0 with MySQL 5.7 and Nginx**
-- **PHP 7.1 with MySQL 5.7 and Nginx**
-- **PHP 7.1 (based on Ubuntu) with MySQL 5.7 and Nginx**
+- **PHP 5.6 with MySQL 5.6 and Nginx** (version 1.0)
+- **PHP 7.0 with MySQL 5.7 and Nginx** (version 1.0)
+- **PHP 7.1 with MySQL 5.7 and Nginx** (version 1.0)
+- **PHP 7.1 (based on Ubuntu) with MySQL 5.7 and Nginx** (version 1.0)
+- **PHP 7.1 (based on Ubuntu) with MySQL 5.7 and Nginx** (version 2.0)
 
-By default when creating new project using `dcc` command will be selected template defined in `.bashrc` for `DEFAULT_TEMPLATE` variable (it's set to **PHP 7.1 with MySQL 5.7 and Nginx** by default).
 
-Obviously depending on your needs you might want to create custom templates (in `docker/templates` directory) or even brand new components (in `docker/definitions` directory) that will fit better your desired environment.
+By default when creating new project using `dcc2` or `dcc` command will be selected template defined in `.bashrc` for `DEFAULT_TEMPLATE` variable (it's set to **PHP 7.1 with MySQL 5.7 and Nginx** by default).
+
+Obviously depending on your needs you might want to create custom templates (in `docker/templates` or `docker/templates2.0` directory) or even brand new components (in `docker/definitions` directory) that will fit better your desired environment.
 
 ## PHP configuration
 
