@@ -6,6 +6,7 @@ web:
     - ${projectdir}${domain}/nginx/log/:/var/log/nginx/
     - ${projectdir}${domain}/supervisor/conf.d/:/etc/supervisor/conf.d/
     - ${projectdir}${domain}/supervisor/log/:/var/log/supervisor/
+    - ${projectdir}${domain}/cron/:/root/.cron/
     - ${localsharedir}:/root/.local_share/
     - ${localsharedir}certificates/:/usr/share/nginx/certificates/  
   working_dir: /usr/share/nginx/html/

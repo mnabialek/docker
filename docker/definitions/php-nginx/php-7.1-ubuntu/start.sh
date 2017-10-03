@@ -19,6 +19,11 @@ service php7.1-fpm start
 # Run Nginx service
 service nginx start
 
+# Run Cron
+mkdir /root/.cron
+crontab /root/.cron/root
+service cron start
+
 # Disable Xdebug for command line
 phpdismod -s cli xdebug
 
