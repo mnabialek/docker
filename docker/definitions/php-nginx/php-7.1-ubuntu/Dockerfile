@@ -16,6 +16,7 @@ RUN locale-gen en_US.UTF-8
 
 # Add some packages
 RUN LC_ALL=C.UTF-8 add-apt-repository ppa:ondrej/php -y
+RUN apt-add-repository ppa:chris-lea/redis-server -y
 RUN apt-add-repository ppa:nginx/development -y
 RUN apt-key update
 RUN apt-get -y update
@@ -94,6 +95,9 @@ libnss3 libgconf-2-4 chromium-browser \
 xvfb gtk2-engines-pixbuf xfonts-cyrillic \
 xfonts-100dpi xfonts-75dpi xfonts-base \
 xfonts-scalable imagemagick x11-apps
+
+# Install Redis
+RUN apt-get -y install redis-server
 
 # Clean
 RUN apt-get -y autoremove

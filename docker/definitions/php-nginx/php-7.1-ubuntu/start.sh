@@ -24,6 +24,9 @@ mkdir /root/.cron
 crontab /root/.cron/root
 service cron start
 
+# Run redis
+service redis-server start
+
 # Disable Xdebug for command line
 phpdismod -s cli xdebug
 
