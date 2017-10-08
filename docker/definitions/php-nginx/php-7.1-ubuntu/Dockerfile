@@ -8,7 +8,7 @@ RUN apt-get -y update;
 RUN apt-get -y upgrade
 
 # Allow to use add-apt-repository command
-RUN apt-get -y install software-properties-common locales
+RUN apt-get -y install software-properties-common locales poppler-utils
 
 # Set valid lcoale
 RUN echo "LC_ALL=en_US.UTF-8" > /etc/default/locale
