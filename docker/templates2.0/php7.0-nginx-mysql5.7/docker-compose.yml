@@ -1,0 +1,41 @@
+web:
+  build: ${definitionsdir}php-nginx/php-7.0-ubuntu
+  volumes:
+    - ${projectdir}${domain}/html/:/usr/share/nginx/html/
+    - ${projectdir}${domain}/nginx/conf.d/:/etc/nginx/conf.d/
+    - ${projectdir}${domain}/nginx/log/:/var/log/nginx/
+    - ${projectdir}${domain}/supervisor/conf.d/:/etc/supervisor/conf.d/
+    - ${projectdir}${domain}/supervisor/log/:/var/log/supervisor/
+    - ${projectdir}${domain}/cron/:/root/.cron/
+    - ${localsharedir}:/root/.local_share/
+    - ${localsharedir}certificates/:/usr/share/nginx/certificates/  
+  working_dir: /usr/share/nginx/html/
+  links:
+    - db
+  container_name: ${prefix}.php
+  hostname: ${domain}
+  ports:
+    - "${sshPort}:22"
+    - "${webPort}:80"
+    - "${secureWebPort}:443"    
+  environment:
+    - VIRTUAL_HOST=${domain}   
+    - CERT_NAME=default
+    - HTTPS_METHOD=noredirect
+db:
+  build: ${definitionsdir}mysql/5.7
+  environment:
+     - MYSQL_ROOT_PASSWORD=pass
+     - MYSQL_DATABASE=
+     - MYSQL_USER=
+     - MYSQL_PASSWORD=
+  expose:
+     - 3306
+  volumes:
+    - ${projectdir}${domain}/mysql/data/:/var/lib/mysql/
+    - ${projectdir}${domain}/mysql/conf.d/:/etc/mysql/conf.d/source
+    - ${projectdir}${domain}/mysql/log/:/var/log/mysql/
+  ports:
+    - "${dbPort}:3306"
+  container_name: ${prefix}.db
+  hostname: ${domain}
