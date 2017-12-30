@@ -1,14 +1,16 @@
-proxy:
-   image: jwilder/nginx-proxy
-   restart: always
-   volumes:
+version: '3.2'
+services:
+  proxy:
+    image: jwilder/nginx-proxy
+    restart: always
+    volumes:
      - /var/run/docker.sock:/tmp/docker.sock:ro
      - ./nginx/conf.d/proxy.conf:/etc/nginx/conf.d/proxy.conf:ro
-     - /c/Users/marcin/docker/local_share/certificates:/etc/nginx/certs:ro      
-   ports:
+     - /Users/marcin/Docker/local_share/certificates:/etc/nginx/certs:ro      
+    ports:
      - "80:80"
      - "443:443"
-   container_name: proxy
+    container_name: proxy
 
 # Based on https://wiki.ssdt-ohio.org/display/rtd/Using+nginx-proxy
 # Full example
