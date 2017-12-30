@@ -12,7 +12,7 @@ web:
   working_dir: /usr/share/nginx/html/
   links:
     - db
-  container_name: ${prefix}.php
+  container_name: ${prefix}.web
   hostname: ${domain}
   ports:
     - "${sshPort}:22"
