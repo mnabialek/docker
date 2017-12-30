@@ -6,7 +6,7 @@
 ################################################
 
 DOCKER_DIR='/c/Users/marcin/docker/';
-DEFINITIONS_DIR='/Users/marcin/docker/definitions/';
+DEFINITIONS_DIR='/c/Users/marcin/docker/definitions/';
 TEMPLATE_DIR=$DOCKER_DIR'templates/';
 TEMPLATE_DIR_2=$DOCKER_DIR'templates2.0/';
 PROJECT_DIR=$DOCKER_DIR'projects/';

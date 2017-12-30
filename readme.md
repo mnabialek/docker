@@ -25,7 +25,7 @@ The following components are available at the moment:
 
    ```
    DOCKER_DIR='/c/Users/marcin/docker/';
-   DEFINITIONS_DIR='/Users/marcin/docker/definitions/';
+   DEFINITIONS_DIR='/c/Users/marcin/docker/definitions/';
    ```
    
    correctly. Probably you should change here only `marcin` into your current Windows user.
