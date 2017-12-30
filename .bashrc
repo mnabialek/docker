@@ -74,7 +74,7 @@ alias drma='docker rm $(docker ps -a -q)'
 
 alias dfrma='dsa && drma'
 
-alias de="docker exec"
+alias de='docker exec'
 
 alias di='docker images'
 
@@ -82,11 +82,11 @@ alias drmi='docker rmi $(docker images --filter "dangling=true" -q --no-trunc)'
 
 alias drmia='docker rmi --force $(docker images -q)'
 
-alias dfix="docker-machine restart default && eval $(docker-machine env default)"
+alias dfix='docker-machine restart default && eval $(docker-machine env default)'
 
-alias dcp="docker cp $1 $2"
+alias dcp='docker cp $1 $2'
 
-alias dlogs="docker logs $1"
+alias dlogs='docker logs $1'
 
 function dssh { docker exec -i -t $1 /bin/bash; }
 
