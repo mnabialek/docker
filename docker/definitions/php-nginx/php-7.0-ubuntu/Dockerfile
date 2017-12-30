@@ -104,10 +104,10 @@ RUN apt-get -y autoremove
 RUN apt-get -y clean
 
 # Copy .bashrc file
-COPY .bashrc /root/.bashrc
+COPY .bashrc /www-data/.bashrc
 
 # Copy services script file
-COPY start.sh /root/start.sh
+COPY start.sh /www-data/start.sh
 
 # Run services file
-CMD ["/bin/bash", "/root/start.sh"]
+CMD ["/bin/bash", "/www-data/start.sh"]
