@@ -98,7 +98,7 @@ To stop, build etc. project please look at `docc` command list. You can also inv
 
 ## Usage
 
-You can SSH into PHP container using private key, `root` as user, docker IP and SSH port you gave using `dcc` command.
+You can SSH into PHP container using private key, `www-data` as user, docker IP and SSH port you gave using `dcc` command.
 
 You can connect to database server using `root` as user, `pass` as password (by default) docker IP and database port you gave using `dcc` command.
 
