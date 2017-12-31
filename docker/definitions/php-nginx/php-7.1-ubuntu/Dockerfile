@@ -103,8 +103,9 @@ RUN apt-get -y install redis-server
 RUN apt-get -y autoremove
 RUN apt-get -y clean
 
-# Copy .bashrc file
+# Copy .bashrc and .profile files
 COPY .bashrc /www-data/.bashrc
+COPY .profile /www-data/.profile
 
 # Copy services script file
 COPY start.sh /www-data/start.sh

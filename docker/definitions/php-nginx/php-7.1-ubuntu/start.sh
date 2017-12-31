@@ -21,6 +21,9 @@ composer config -g github-oauth.github.com $(cat /www-data/.local_share/tokens/g
 # Set valid permission to www-data directory
 chown -R www-data:www-data /www-data
 
+# Set valid permission to website directory
+chown -R www-data:www-data /usr/share/nginx/html
+
 # Run PHP service
 service php7.1-fpm start
 
