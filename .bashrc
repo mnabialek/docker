@@ -139,6 +139,10 @@ sed -i -e "s/\${dbPort}/$5/g" ${OUTPUT_DIR}docker-compose.yml;
 sed -i -e "s/\${sshPort}/$6/g" ${OUTPUT_DIR}docker-compose.yml;
 echo "Created ${OUTPUT_DIR}docker-compose.yml file";
 
+# Copy docker-sync.yml and fill in variables
+cp "${TEMPLATE_DIR}${TEMPLATE}/docker-sync.yml" $OUTPUT_DIR;
+sed -i -e "s/\${prefix}/$2/g" ${OUTPUT_DIR}docker-sync.yml;
+
 # Copy nginx directory structure
 cp -R "${TEMPLATE_DIR}${TEMPLATE}/nginx" "${OUTPUT_DIR}nginx"
 echo "Created ${OUTPUT_DIR}nginx directory structure";
