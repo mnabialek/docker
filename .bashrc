@@ -238,6 +238,10 @@ echo "Created ${OUTPUT_DIR}html directory structure";
 cp -R "${TEMPLATE_DIR_2}${TEMPLATE}/supervisor" "${OUTPUT_DIR}supervisor"
 echo "Created ${OUTPUT_DIR}supervisor directory structure";
 
+# Copy cron structure
+cp -R "${TEMPLATE_DIR_2}${TEMPLATE}/cron" "${OUTPUT_DIR}cron"
+echo "Created ${OUTPUT_DIR}cron directory structure";
+
 echo "Finished with success";
 
 echo "${green}Hint: ${red}You should add this project to XLS to not use same ports in future${reset}";
