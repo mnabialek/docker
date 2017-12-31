@@ -54,7 +54,7 @@ export -f docc
 function dcu { 
 # If docker-sync.yml exists run docker-sync-stack start
 if [ -f "${PROJECT_DIR}${1}/docker-sync.yml" ]; then
-  docker-sync-stack start --config=${PROJECT_DIR}${1}/docker-sync.yml
+  cd ${PROJECT_DIR}${1} && docker-sync-stack start
   return;
 fi
 
