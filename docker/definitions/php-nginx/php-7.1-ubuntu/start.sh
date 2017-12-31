@@ -5,7 +5,7 @@ echo 'root:123' | chpasswd
 sed -i 's/PermitRootLogin prohibit\-password/PermitRootLogin yes/' /etc/ssh/sshd_config
 
 # Allow www-data user to log in
-sed -i 's#www-data:/var/www:/usr/sbin/nologin#www-data:/www-data:/bin/bash#' /etc/passwd6 
+sed -i 's#www-data:/var/www:/usr/sbin/nologin#www-data:/www-data:/bin/bash#' /etc/passwd 
 # Set www-data password (123 here is www-data user password)
 echo 'www-data:123' | chpasswd
 
@@ -25,7 +25,6 @@ service php7.1-fpm start
 service nginx start
 
 # Run Cron
-mkdir /www-data/.cron
 crontab /www-data/.cron/www-data
 service cron start
 
