@@ -51,7 +51,16 @@ export -f docc
 # Extra docker commands aliases
 ################################################
 
-function dcu { docker-compose -f "${PROJECT_DIR}${1}/docker-compose.yml" up -d; }
+function dcu { 
+# If docker-sync.yml exists run docker-sync-stack start
+if [ -f "${PROJECT_DIR}${1}/docker-sync.yml" ]; then
+  docker-sync-stack start --config=${PROJECT_DIR}${1}/docker-sync.yml
+  return;
+fi
+
+# Otherwise run just docker-compose up
+docker-compose -f "${PROJECT_DIR}${1}/docker-compose.yml" up -d; 
+}
 
 export -f dcu
 
