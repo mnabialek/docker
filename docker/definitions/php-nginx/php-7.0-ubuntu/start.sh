@@ -18,6 +18,9 @@ chmod 600 /www-data/.ssh/authorized_keys
 # Save Github Oauth token to prevent limits when using Composer
 composer config -g github-oauth.github.com $(cat /www-data/.local_share/tokens/github-oauth)
 
+# Set valid permission to www-data directory
+chown -R www-data:www-data /www-data
+
 # Run PHP service
 service php7.0-fpm start
 
