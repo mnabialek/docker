@@ -1,0 +1,53 @@
+version: "3.2"
+services:
+  web:
+    build: ${definitionsdir}php-nginx/php-7.2-ubuntu
+    volumes:
+      - ${prefix}-sync:/usr/share/nginx/html/:nocopy
+      - ${projectdir}${domain}/nginx/conf.d/:/etc/nginx/conf.d/
+      - ${projectdir}${domain}/nginx/log/:/var/log/nginx/
+      - ${projectdir}${domain}/supervisor/conf.d/:/etc/supervisor/conf.d/
+      - ${projectdir}${domain}/supervisor/log/:/var/log/supervisor/
+      - ${projectdir}${domain}/cron/:/www-data/.cron/
+      - ${localsharedir}:/www-data/.local_share/
+      - ${localsharedir}certificates/:/usr/share/nginx/certificates/  
+    working_dir: /usr/share/nginx/html/
+    links:
+      - db
+    container_name: ${prefix}.web
+    hostname: ${domain}
+    ports:
+      - "${sshPort}:22"
+      - "${webPort}:80"
+      - "${secureWebPort}:443"    
+    environment:
+      - VIRTUAL_HOST=${domain}   
+      - CERT_NAME=default
+      - HTTPS_METHOD=noredirect
+    networks:
+      - default
+      - proxy_default      
+  db:
+    build: ${definitionsdir}mysql/5.7
+    environment:
+       - MYSQL_ROOT_PASSWORD=pass
+       - MYSQL_DATABASE=
+       - MYSQL_USER=
+       - MYSQL_PASSWORD=
+    expose:
+       - 3306
+    volumes:
+      - ${projectdir}${domain}/mysql/data/:/var/lib/mysql/
+      - ${projectdir}${domain}/mysql/conf.d/:/etc/mysql/conf.d/source
+      - ${projectdir}${domain}/mysql/log/:/var/log/mysql/
+    ports:
+      - "${dbPort}:3306"
+    container_name: ${prefix}.db
+    hostname: ${domain}
+volumes:
+  ${prefix}-sync:
+    external: true
+networks:
+  proxy_default:
+    external:
+      name: proxy_default    
