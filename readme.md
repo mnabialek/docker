@@ -1,14 +1,15 @@
-# Docker
-This project is intended to help you create and manage your Docker projects. It was tested on is for Windows but Linux users can also use this for their Docker projects (be aware installation instruction is for Windows users). It's intended only for local usage (no security aspects included).
+# Docker for developers
+This project is intended to help you create and manage your Docker projects. It was tested on MacOS (Docker for Mac) but Linux/Windows users can also use this for their Docker projects (be aware installation instruction is for MacOS users but it should work in similar way for Windows/Linux users). It's intended only for local usage (no security aspects included).
+
+By default all pre-defined templates come with support of [Docker Sync](http://docker-sync.io) to provide maximum performance so make sure you have installed it before.
  
 # Available components
  
 The following components are available at the moment:
-- **PHP 5.6** (based on PHP Docker image)
-- **PHP 5.6 with intl extension** (based on PHP Docker image)
-- **PHP 7.0** (based on PHP Docker image)
-- **PHP 7.1** (based on PHP Docker image)
-- **PHP 7.1** (based on Ubuntu 16.04 Docker image)
+- **PHP 5.6**
+- **PHP 7.0**
+- **PHP 7.1**
+- **PHP 7.2**
 - **MySQL 5.6**
 - **MySQL 5.7**
 - **Nginx**
@@ -17,68 +18,65 @@ The following components are available at the moment:
 
 1. Clone this repository
 
-2. Open `Docker Quickstart Terminal` (later in this document we refer this as `terminal`) shortcut and write `pwd`.
+2. Open terminal
 
-3. Into directory you got from `pwd` command you should copy `docker` directory and `.bashrc` file. In case you have either directory or this file already you should merge them manually
+3. Into directory of your selection you should create `Docker` directory (you can name it whatever you want). Into directory put content of `docker` directory from this repository, copy also `.bashrc` file to your user directory and make sure it has been loaded. 
 
 4. Open `.bashrc` file now and set:
 
    ```
-   DOCKER_DIR='/c/Users/marcin/docker/';
-   DEFINITIONS_DIR='/c/Users/marcin/docker/definitions/';
+   DOCKER_DIR='/Users/marcin/Docker/';
+   DEFINITIONS_DIR='/Users/marcin/Docker/definitions/';
    ```
    
-   correctly. Probably you should change here only `marcin` into your current Windows user.
+   correctly. Probably you should change here only `marcin` into your current MacOS user if you created `Docker` directory in your home directory. Otherwise use custom path.
+  
+5. Now open `projects/proxy/docker-composer.yml` file inside your DOCKER_DIR directory and update line:
+
+   ```
+   /Users/marcin/Docker/local_share/certificates:/etc/nginx/certs:ro
+   ```
    
-5. In terminal run now:
+   with valid path.
+   
+   
+6. In terminal run now:
 
    ```
    docc
    ```
    
-   you will see aliases and extra commands for managing Docker projects.
+   you will see aliases and extra commands for managing Docker projects (If it doesn't work double check if `.bashrc` is loaded).
    
-6. Into `local_directory` of your docker directory you should put public SSH key (in OpenSSH format) into `ssh` subdirectory and you should generate Github access token and put it into `github-oauth` file of `tokens` directory
-
-7. Adjust path in `docker-compose.yml` in `proxy` project that will match your certificated directory. By default it's set to:
-
-   ```
-   /c/Users/marcin/docker/local_share/certificates
-   ```
+7. Into `local_directory` of your docker directory you should put public SSH key (in OpenSSH format) into `ssh` subdirectory and you should generate Github access token and put it into `github-oauth` file of `tokens` directory
 
 ## Project creation
 
-In terminal run `dcc2` to create project, you will see required parameters for this command.
+In terminal run `dcc` to create project, you will see required parameters for this command.
 
 Example creation of project:
 
 ```
-dcc2 test.app test 8080 18080 30060 220 10010
+dcc test.local test 8080 18080 30060 220 10010
 ```
-
-or 
-
-```
-dcc test.app test 8080 30060 220 10010
-```
-
-if you are using old-version templates.
 
 Now if everything goes fine, you can run the project running in terminal:
 
 ```
-dcu test.app
+dcu test.local
 ```
 
-Now you can access your site in browser using your Docker IP (usually 192.169.99.100) and port you gave for `dcc` command - in this case it would be 192.169.99.100:8080
+By default 
+
+Now you can access your site in browser using your Docker IP (usually 192.168.0.196) and port you gave for `dcc` command - in this case it would be 192.168.0.196:8080
 
 If you want to run your site using domain without port, add 
 
 ```
-192.168.99.100 test.app
+192.168.99.100 test.local
 ```
     
-into your Windows `hosts` file
+into your MacOS `hosts` file
     
 and run also
 
@@ -86,11 +84,11 @@ and run also
 dcu proxy
 ```
 
-Now you should be able to access your site using `http://test.app` in your browser. If you created project using `dcc2` you should get working both `http://test.app` and `https://test.app` but if you used `dcc` only http version will be working by default.
+Now you should be able to access your site using both `http://test.local` and `https://test.local`.
 
 ## Other projects
 
-When you create other projects you should make sure you are using other ports that in different projects, so you should write down those ports each time you add new project to make sure there won't be any port collisions between projects.
+When you create other projects you should make sure you are using other ports than in different projects, so you should write down those ports each time you add new project to make sure there won't be any port collisions between projects.
 
 ## Other docker commands
 
@@ -98,7 +96,7 @@ To stop, build etc. project please look at `docc` command list. You can also inv
 
 ## Usage
 
-You can SSH into PHP container using private key, `www-data` as user, docker IP and SSH port you gave using `dcc` command.
+You can SSH into PHP container using private key, `www-data` as user, docker IP and SSH port you gave using `dcc` command. Alternatively you can also log in using `123` password. You can also log in as root user (same password and key) but it's recommended to log in as `www-data` user to avoid permissions problems.
 
 You can connect to database server using `root` as user, `pass` as password (by default) docker IP and database port you gave using `dcc` command.
 
@@ -106,23 +104,43 @@ To connect database from PHP application you can use `db` as host, `3306` as por
 
 ## Available templates
 
-This project comes with a few built-in templates:
+The following predefined templates are available at the moment:
 
-- **PHP 5.6 with MySQL 5.6 and Nginx** (version 1.0)
-- **PHP 7.0 with MySQL 5.7 and Nginx** (version 1.0)
-- **PHP 7.1 with MySQL 5.7 and Nginx** (version 1.0)
-- **PHP 7.1 (based on Ubuntu) with MySQL 5.7 and Nginx** (version 1.0)
-- **PHP 7.1 (based on Ubuntu) with MySQL 5.7 and Nginx** (version 2.0)
+- **PHP 5.6 with MySQL 5.6 and Nginx**
+- **PHP 7.0 with MySQL 5.7 and Nginx**
+- **PHP 7.1 with MySQL 5.7 and Nginx**
+- **PHP 7.2 with MySQL 5.7 and Nginx**
 
+By default when creating new project using `dcc` command will be selected template defined in `.bashrc` for `DEFAULT_TEMPLATE` variable (it's set to **PHP 7.2 with MySQL 5.7 and Nginx** by default).
 
-By default when creating new project using `dcc2` or `dcc` command will be selected template defined in `.bashrc` for `DEFAULT_TEMPLATE` variable (it's set to **PHP 7.1 with MySQL 5.7 and Nginx** by default).
+Obviously depending on your needs you might want to create custom templates (in `templates`) or even brand new components (in `definitions` directory) that will fit better your desired environment.
 
-Obviously depending on your needs you might want to create custom templates (in `docker/templates` or `docker/templates2.0` directory) or even brand new components (in `docker/definitions` directory) that will fit better your desired environment.
+## Docker sync
 
-## PHP configuration
+Because of performance by default all projects (except of proxy) will be run using docker sync. To stop such container just press **CTRL + C** as advised in terminal.
 
-By default there are a few PHP extensions installed. You can add more in `Dockerfile` for PHP in `docker/definitions` directory. Be aware to use them in the project, you need to add more PHP configuration files into `*/php/config/conf.d` directory. By default only `pdo_mysql` and `xdebug` are turned on however some additional extensions (for example `soap` or `gd`) are already included in build.  
+However if you don't want to use docker sync at all, you can remove all `docker-sync.yml` files from templates in `templates` directory and additionally you should update each `docker-compose.yml` file this way:
 
+1. Remove following lines:
+
+    ```
+    volumes:
+      ${prefix}-sync:
+        external: true
+    ```
+
+2. Change line:
+
+    ```
+    - ${prefix}-sync:/usr/share/nginx/html/:nocopy
+    ```
+    
+    into
+
+    ```
+    - ${projectdir}${domain}/html:/usr/share/nginx/html/
+    ```
+    
 ## Licence
 
 This package is licenced under the [MIT license](http://opensource.org/licenses/MIT)
