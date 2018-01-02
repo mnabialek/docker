@@ -141,6 +141,8 @@ However if you don't want to use docker sync at all, you can remove all `docker-
     - ${projectdir}${domain}/html:/usr/share/nginx/html/
     ```
     
+However keep in mind that recommended scenario is keep original templates not changed and instead create copy of them for example with `-nosync` suffix just to have possibility to switch to synced version in future or keep update with this repository.   
+
 ## Licence
 
 This package is licenced under the [MIT license](http://opensource.org/licenses/MIT)
