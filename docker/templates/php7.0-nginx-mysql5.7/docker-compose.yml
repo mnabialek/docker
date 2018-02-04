@@ -3,7 +3,7 @@ services:
   web:
     build: ${definitionsdir}php-nginx/php-7.0-ubuntu
     volumes:
-      - ${prefix}-sync:/usr/share/nginx/html/:nocopy
+      - ${projectdir}${domain}/html/:/usr/share/nginx/html/
       - ${projectdir}${domain}/nginx/conf.d/:/etc/nginx/conf.d/
       - ${projectdir}${domain}/nginx/log/:/var/log/nginx/
       - ${projectdir}${domain}/supervisor/conf.d/:/etc/supervisor/conf.d/
@@ -44,9 +44,6 @@ services:
       - "${dbPort}:3306"
     container_name: ${prefix}.db
     hostname: ${domain}
-volumes:
-  ${prefix}-sync:
-    external: true
 networks:
   proxy_default:
     external:
