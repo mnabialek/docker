@@ -1,7 +1,7 @@
 # Docker for developers
 This project is intended to help you create and manage your Docker projects. It was tested on MacOS (Docker for Mac) but Linux/Windows users can also use this for their Docker projects (be aware installation instruction is for MacOS users but it should work in similar way for Windows/Linux users). It's intended only for local usage (no security aspects included).
 
-By default all pre-defined templates come with support of [Docker Sync](http://docker-sync.io) to provide maximum performance so make sure you have installed it before.
+By default all pre-defined templates come with standard version and also with version with support of [Docker Sync](http://docker-sync.io) to provide maximum performance so make sure you have installed it before (keep in mind there are problems with full synchronization using Docker Sync).
  
 # Available components
  
@@ -113,35 +113,7 @@ The following predefined templates are available at the moment:
 
 By default when creating new project using `dcc` command will be selected template defined in `.bashrc` for `DEFAULT_TEMPLATE` variable (it's set to **PHP 7.2 with MySQL 5.7 and Nginx** by default).
 
-Obviously depending on your needs you might want to create custom templates (in `templates`) or even brand new components (in `definitions` directory) that will fit better your desired environment.
-
-## Docker sync
-
-Because of performance by default all projects (except of proxy) will be run using docker sync. To stop such container just press **CTRL + C** as advised in terminal.
-
-However if you don't want to use docker sync at all, you can remove all `docker-sync.yml` files from templates in `templates` directory and additionally you should update each `docker-compose.yml` file this way:
-
-1. Remove following lines:
-
-    ```
-    volumes:
-      ${prefix}-sync:
-        external: true
-    ```
-
-2. Change line:
-
-    ```
-    - ${prefix}-sync:/usr/share/nginx/html/:nocopy
-    ```
-    
-    into
-
-    ```
-    - ${projectdir}${domain}/html:/usr/share/nginx/html/
-    ```
-    
-However keep in mind that recommended scenario is keep original templates not changed and instead create copy of them for example with `-nosync` suffix just to have possibility to switch to synced version in future or keep update with this repository.   
+Obviously depending on your needs you might want to create custom templates (in `templates`) or even brand new components (in `definitions` directory) that will fit better your desired environment.   
 
 ## Licence
 
