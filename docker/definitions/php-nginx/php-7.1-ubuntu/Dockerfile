@@ -4,7 +4,7 @@ FROM ubuntu:16.04
 RUN export DEBIAN_FRONTEND=noninteractive
 
 # Update packages list and system
-RUN apt-get -y update;
+RUN apt-get -y update
 RUN apt-get -y upgrade
 
 # Allow to use add-apt-repository command
@@ -42,9 +42,6 @@ php7.1-intl php7.1-readline php-xdebug php-pear
 # Install Composer globally
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
-
-# Speed up Composer installations
-RUN composer global require hirak/prestissimo
 
 # Install SSH server
 RUN apt-get --yes install openssh-server
