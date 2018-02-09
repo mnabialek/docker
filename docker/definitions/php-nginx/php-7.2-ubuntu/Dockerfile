@@ -76,7 +76,7 @@ RUN echo "xdebug.remote_connect_back = 1" >> /etc/php/7.2/mods-available/xdebug.
 RUN echo "xdebug.remote_port = 9999" >> /etc/php/7.2/mods-available/xdebug.ini
 RUN echo "xdebug.max_nesting_level = 512" >> /etc/php/7.2/mods-available/xdebug.ini
 RUN echo "xdebug.profiler_output_dir=\"\"" >> /etc/php/7.2/mods-available/xdebug.ini
-RUN echo "xdebug.profiler_enable_trigge=1" >> /etc/php/7.2/mods-available/xdebug.ini
+RUN echo "xdebug.profiler_enable_trigger=1" >> /etc/php/7.2/mods-available/xdebug.ini
 
 # Set PHP options
 RUN sed -i "s/error_reporting = .*/error_reporting = -1/" /etc/php/7.2/fpm/php.ini
