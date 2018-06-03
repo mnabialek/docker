@@ -1,7 +1,7 @@
 # Docker for developers
 This project is intended to help you create and manage your Docker projects. It was tested on MacOS (Docker for Mac) but Linux/Windows users can also use this for their Docker projects (be aware installation instruction is for MacOS users but it should work in similar way for Windows/Linux users). It's intended only for local usage (no security aspects included).
+This project is intended to help you create and manage your Docker projects. It was tested on MacOS (Docker for Mac) but Linux/Windows users can also use this for their Docker projects (be aware installation instruction is for MacOS users but it should work in similar way for Windows/Linux users). It's intended only for local usage (no security aspects included).
 
-By default all pre-defined templates come with standard version and also with version with support of [Docker Sync](http://docker-sync.io) to provide maximum performance so make sure you have installed it before (keep in mind there are problems with full synchronization using Docker Sync).
  
 # Available components
  

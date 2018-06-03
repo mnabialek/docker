@@ -51,14 +51,7 @@ export -f docc
 # Extra docker commands aliases
 ################################################
 
-function dcu { 
-# If docker-sync.yml exists run docker-sync-stack start
-if [ -f "${PROJECT_DIR}${1}/docker-sync.yml" ]; then
-  cd ${PROJECT_DIR}${1} && docker-sync-stack start
-  return;
-fi
-
-# Otherwise run just docker-compose up
+function dcu {
 docker-compose -f "${PROJECT_DIR}${1}/docker-compose.yml" up -d; 
 }
 
@@ -147,12 +140,6 @@ sed -i '' -e "s/\${secureWebPort}/$4/g" ${OUTPUT_DIR}docker-compose.yml;
 sed -i '' -e "s/\${dbPort}/$5/g" ${OUTPUT_DIR}docker-compose.yml;
 sed -i '' -e "s/\${sshPort}/$6/g" ${OUTPUT_DIR}docker-compose.yml;
 echo "Created ${OUTPUT_DIR}docker-compose.yml file";
-
-# Copy docker-sync.yml and fill in variables
-if [ -f "${TEMPLATE_DIR}${TEMPLATE}/docker-sync.yml" ]; then
-  cp "${TEMPLATE_DIR}${TEMPLATE}/docker-sync.yml" $OUTPUT_DIR;
-  sed -i '' -e "s/\${prefix}/$2/g" ${OUTPUT_DIR}docker-sync.yml;
-fi
 
 # Copy nginx directory structure
 cp -R "${TEMPLATE_DIR}${TEMPLATE}/nginx" "${OUTPUT_DIR}nginx"

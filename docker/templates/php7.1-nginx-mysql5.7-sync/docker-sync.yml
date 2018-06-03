@@ -1,5 +1,0 @@
-version: "2"
-syncs:
-  ${prefix}-sync:
-    src: './html'
-    sync_strategy: 'native_osx'
