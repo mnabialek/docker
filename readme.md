@@ -12,6 +12,7 @@ The following components are available at the moment:
 - **PHP 7.2**
 - **MySQL 5.6**
 - **MySQL 5.7**
+- **MySQL 8.0**
 - **Nginx**
 
 ## Installation
@@ -96,7 +97,7 @@ To stop, build etc. project please look at `docc` command list. You can also inv
 
 ## Usage
 
-You can SSH into PHP container using private key, `www-data` as user, docker IP and SSH port you gave using `dcc` command. Alternatively you can also log in using `123` password. You can also log in as root user (same password and key) but it's recommended to log in as `www-data` user to avoid permissions problems.
+You can SSH into PHP container using private key, `www-data` as user, docker IP and SSH port you gave using `dcc` command. Alternatively you can also log in using `123` password. You can also log in as root user (same password) but it's recommended to log in as `www-data` user to avoid permissions problems.
 
 You can connect to database server using `root` as user, `pass` as password (by default) docker IP and database port you gave using `dcc` command.
 
@@ -110,6 +111,7 @@ The following predefined templates are available at the moment:
 - **PHP 7.0 with MySQL 5.7 and Nginx**
 - **PHP 7.1 with MySQL 5.7 and Nginx**
 - **PHP 7.2 with MySQL 5.7 and Nginx**
+- **PHP 7.2 with MySQL 8.0 and Nginx**
 
 By default when creating new project using `dcc` command will be selected template defined in `.bashrc` for `DEFAULT_TEMPLATE` variable (it's set to **PHP 7.2 with MySQL 5.7 and Nginx** by default).
 
