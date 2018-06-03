@@ -9,8 +9,11 @@ services:
       - ${projectdir}${domain}/supervisor/conf.d/:/etc/supervisor/conf.d/
       - ${projectdir}${domain}/supervisor/log/:/var/log/supervisor/
       - ${projectdir}${domain}/cron/:/www-data/.cron/
+      - ${projectdir}${domain}/php/mods-available/:/etc/php/7.0/mods-available/
+      - ${projectdir}${domain}/php/fpm/php.ini:/etc/php/7.0/fpm/php.ini
+      - ${projectdir}${domain}/php/cli/php.ini:/etc/php/7.0/cli/php.ini
       - ${localsharedir}:/www-data/.local_share/
-      - ${localsharedir}certificates/:/usr/share/nginx/certificates/  
+      - ${localsharedir}certificates/:/usr/share/nginx/certificates/
     working_dir: /usr/share/nginx/html/
     links:
       - db
