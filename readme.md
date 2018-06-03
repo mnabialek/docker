@@ -119,7 +119,7 @@ Obviously depending on your needs you might want to create custom templates (in 
 
 ## Images
 
-This packages uses by default [PHP with Nginx images](https://hub.docker.com/r/mnabialek/laravel-php-nginx/) - you can find their source at [Docker images](https://hub.docker.com/r/mnabialek/docker-images/)
+This packages uses by default [PHP with Nginx images](https://hub.docker.com/r/mnabialek/laravel-php-nginx/) - you can find their source at [Docker images](https://github.com/mnabialek/docker-images)
 
 ## Licence
 
