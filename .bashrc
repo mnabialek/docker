@@ -31,6 +31,7 @@ function docc() {
    echo "${green}dcu ${yellow}(Docker compose up)${reset} - run containers from given docker compose project";
    echo "${green}dcs ${yellow}(Docker compose stop)${reset} - stop containers for given docker compose project";
    echo "${green}dcb ${yellow}(Docker compose build)${reset} - build containers for given docker compose project";
+   echo "${green}dct ${yellow}(Docker compose templates)${reset} - show available templates for creating project";
    echo "${green}dps ${yellow}(Docker ps)${reset} - show all docker containers";
    echo "${green}dsa ${yellow}(Docker stop all)${reset} - stop all containers";
    echo "${green}drma ${yellow}(Docker remove all)${reset} - remove all containers";
@@ -48,7 +49,7 @@ function docc() {
 export -f docc
 
 ################################################
-# Extra docker commands aliases
+# Extra docker commands aliases and helpers
 ################################################
 
 function dcu {
@@ -62,6 +63,10 @@ function dcs { docker-compose -f "${PROJECT_DIR}${1}/docker-compose.yml" stop; }
 export -f dcs
 
 function dcb { docker-compose -f "${PROJECT_DIR}${1}/docker-compose.yml" build --no-cache; }
+
+export -f dcb
+
+function dct { echo "${green}Available templates:${reset}"; ls -1 "${TEMPLATE_DIR}" | sed 's#/$##'; }
 
 export -f dcb
 
@@ -112,6 +117,7 @@ fi
 # Verify whether template directory exists
 if [ ! -d "${TEMPLATE_DIR}${TEMPLATE}" ]; then
   echo "${red}Template directory ${TEMPLATE_DIR}${TEMPLATE} does NOT exist${reset}";
+  dct;
   return;
 fi
 
