@@ -162,6 +162,10 @@ echo "Created ${OUTPUT_DIR}supervisor directory structure";
 cp -R "${TEMPLATE_DIR}${TEMPLATE}/cron" "${OUTPUT_DIR}cron"
 echo "Created ${OUTPUT_DIR}cron directory structure";
 
+# Copy PHP structure
+cp -R "${TEMPLATE_DIR}${TEMPLATE}/php" "${OUTPUT_DIR}php"
+echo "Created ${OUTPUT_DIR}cron directory structure";
+
 echo "Finished with success";
 
 echo "${green}Hint: ${red}You should add this project to XLS to not use same ports in future${reset}";
