@@ -103,15 +103,15 @@ export -f dssh
 function dcc {
 
 # Verify number of arguments
-if [ "$#" -lt 6 ]; then
-   echo "${red}Invalid number of parameters. You should pass \$domain, \$prefix, \$webPort, \$secureWebPort, \$dbPort, \$sshPort and optionally \$templateName${reset}";
+if [ "$#" -lt 7 ]; then
+   echo "${red}Invalid number of parameters. You should pass \$domain, \$prefix, \$webPort, \$secureWebPort, \$dbPort, \$sshPort, \$xdebugPort and optionally \$templateName${reset}";
    return;
 fi
 
-if [ -z "$7" ]; then
+if [ -z "$8" ]; then
   TEMPLATE=$DEFAULT_TEMPLATE;
 else
-  TEMPLATE=$7;  
+  TEMPLATE=$8;  
 fi
 
 # Verify whether template directory exists
@@ -170,6 +170,7 @@ echo "Created ${OUTPUT_DIR}cron directory structure";
 
 # Copy PHP structure
 cp -R "${TEMPLATE_DIR}${TEMPLATE}/php" "${OUTPUT_DIR}php"
+sed -i '' -e "s/\${xdebugPort}/$7/g" ${OUTPUT_DIR}php/mods-available/xdebug.ini;
 echo "Created ${OUTPUT_DIR}cron directory structure";
 
 echo "Finished with success";
