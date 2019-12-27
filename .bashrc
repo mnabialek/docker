@@ -10,7 +10,7 @@ DEFINITIONS_DIR='/Users/marcin/Docker/definitions/';
 TEMPLATE_DIR=$DOCKER_DIR'templates/';
 PROJECT_DIR=$DOCKER_DIR'projects/';
 LOCAL_SHARE_DIRECTORY=$DOCKER_DIR'local_share/';
-DEFAULT_TEMPLATE='php7.2-nginx-mysql5.7';
+DEFAULT_TEMPLATE='php7.7-nginx-mysql8.0';
 
 ################################################
 # Define colors for terminal
@@ -27,7 +27,7 @@ reset=`tput sgr0`
 
 function docc() {
    echo "Available aliases for Docker commands:"
-   echo "${green}dcc ${yellow}(Docker compose create)${reset} - create new docker compose project from template";  
+   echo "${green}dcc ${yellow}(Docker compose create)${reset} - create new docker compose project from template";
    echo "${green}dcu ${yellow}(Docker compose up)${reset} - run containers from given docker compose project";
    echo "${green}dcs ${yellow}(Docker compose stop)${reset} - stop containers for given docker compose project";
    echo "${green}dcb ${yellow}(Docker compose build)${reset} - build containers for given docker compose project";
@@ -43,7 +43,7 @@ function docc() {
    echo "${green}di ${yellow}(Docker images)${reset} - list Docker images";
    echo "${green}drmi ${yellow}(Docker remove images)${reset} - remove unused Docker images";
    echo "${green}drmia ${yellow}(Docker remove all images)${reset} - remove all Docker images (they need to be redownloaded)";
-   echo "${green}dfix ${yellow}(Docker fix)${reset} - fix docker problems in case of strange errors";   
+   echo "${green}dfix ${yellow}(Docker fix)${reset} - fix docker problems in case of strange errors";
 }
 
 export -f docc
@@ -53,7 +53,7 @@ export -f docc
 ################################################
 
 function dcu {
-docker-compose -f "${PROJECT_DIR}${1}/docker-compose.yml" up -d; 
+docker-compose -f "${PROJECT_DIR}${1}/docker-compose.yml" up -d;
 }
 
 export -f dcu
@@ -111,7 +111,7 @@ fi
 if [ -z "$8" ]; then
   TEMPLATE=$DEFAULT_TEMPLATE;
 else
-  TEMPLATE=$8;  
+  TEMPLATE=$8;
 fi
 
 # Verify whether template directory exists
@@ -135,7 +135,7 @@ mkdir $OUTPUT_DIR;
 echo "Created ${OUTPUT_DIR} directory"
 
 # Copy docker-compose.yml and fill in variables
-cp "${TEMPLATE_DIR}${TEMPLATE}/docker-compose.yml" $OUTPUT_DIR; 
+cp "${TEMPLATE_DIR}${TEMPLATE}/docker-compose.yml" $OUTPUT_DIR;
 sed -i '' -e "s#\${projectdir}#${PROJECT_DIR}#g" ${OUTPUT_DIR}docker-compose.yml;
 sed -i '' -e "s#\${definitionsdir}#${DEFINITIONS_DIR}#g" ${OUTPUT_DIR}docker-compose.yml;
 sed -i '' -e "s#\${localsharedir}#${LOCAL_SHARE_DIRECTORY}#g" ${OUTPUT_DIR}docker-compose.yml;

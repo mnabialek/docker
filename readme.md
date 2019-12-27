@@ -113,8 +113,9 @@ The following predefined templates are available at the moment:
 - **PHP 7.2 with MySQL 5.7 and Nginx**
 - **PHP 7.2 with MySQL 8.0 and Nginx**
 - **PHP 7.3 with MySQL 8.0 and Nginx**
+- **PHP 7.4 with MySQL 8.0 and Nginx**
 
-By default when creating new project using `dcc` command will be selected template defined in `.bashrc` for `DEFAULT_TEMPLATE` variable (it's set to **PHP 7.2 with MySQL 5.7 and Nginx** by default).
+By default when creating new project using `dcc` command will be selected template defined in `.bashrc` for `DEFAULT_TEMPLATE` variable (it's set to **PHP 7.4 with MySQL 8 and Nginx** by default).
 
 Obviously depending on your needs you might want to create custom templates (in `templates`) or even brand new components (in `definitions` directory) that will fit better your desired environment.
 
