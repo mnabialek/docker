@@ -1,0 +1,53 @@
+version: "3.2"
+services:
+  web:
+    build: ${definitionsdir}php-nginx/php-8.0-ubuntu
+    volumes:
+      - ${projectdir}${domain}/html/:/usr/share/nginx/html/
+      - ${projectdir}${domain}/nginx/conf.d/:/etc/nginx/conf.d/
+      - ${projectdir}${domain}/nginx/log/:/var/log/nginx/
+      - ${projectdir}${domain}/supervisor/conf.d/:/etc/supervisor/conf.d/
+      - ${projectdir}${domain}/supervisor/log/:/var/log/supervisor/
+      - ${projectdir}${domain}/cron/:/www-data/.cron/
+      - ${projectdir}${domain}/php/mods-available/:/etc/php/8.0/mods-available/
+      - ${projectdir}${domain}/php/fpm/php.ini:/etc/php/8.0/fpm/php.ini
+      - ${projectdir}${domain}/php/cli/php.ini:/etc/php/8.0/cli/php.ini
+      - ${localsharedir}:/www-data/.local_share/
+      - ${localsharedir}certificates/:/usr/share/nginx/certificates/
+    working_dir: /usr/share/nginx/html/
+    links:
+      - db
+    container_name: ${prefix}.web
+    hostname: ${domain}
+    ports:
+      - "${sshPort}:22"
+      - "${webPort}:80"
+      - "${secureWebPort}:443"
+    environment:
+      - VIRTUAL_HOST=${domain}
+      - CERT_NAME=default
+      - HTTPS_METHOD=noredirect
+    networks:
+      - default
+      - proxy_default
+  db:
+    build: ${definitionsdir}mysql/8.0
+    environment:
+       - MYSQL_ROOT_PASSWORD=pass
+       - MYSQL_DATABASE=
+       - MYSQL_USER=
+       - MYSQL_PASSWORD=
+    expose:
+       - 3306
+    volumes:
+      - ${projectdir}${domain}/mysql/data/:/var/lib/mysql/
+      - ${projectdir}${domain}/mysql/conf.d/:/etc/mysql/conf.d/source
+      - ${projectdir}${domain}/mysql/log/:/var/log/mysql/
+    ports:
+      - "${dbPort}:3306"
+    container_name: ${prefix}.db
+    hostname: ${domain}
+networks:
+  proxy_default:
+    external:
+      name: proxy_default

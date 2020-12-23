@@ -1,0 +1,1 @@
+FROM mnabialek/laravel-php-nginx:php8.0-ubuntu
