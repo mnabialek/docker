@@ -13,6 +13,7 @@ The following components are available at the moment:
 - **PHP 7.3**
 - **PHP 7.4**
 - **PHP 8.0**
+- **PHP 8.1**
 - **MySQL 5.6**
 - **MySQL 5.7**
 - **MySQL 8.0**

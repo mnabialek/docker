@@ -10,7 +10,7 @@ DEFINITIONS_DIR='/Users/marcin/Docker/definitions/';
 TEMPLATE_DIR=$DOCKER_DIR'templates/';
 PROJECT_DIR=$DOCKER_DIR'projects/';
 LOCAL_SHARE_DIRECTORY=$DOCKER_DIR'local_share/';
-DEFAULT_TEMPLATE='php8.0-nginx-mysql8.0';
+DEFAULT_TEMPLATE='php8.1-nginx-mysql8.0';
 
 ################################################
 # Define colors for terminal
